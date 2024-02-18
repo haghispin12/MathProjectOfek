@@ -1,5 +1,4 @@
 package com.example.mathprojectofek;
-import android.widget.EditText;
 
 import java.util.Random;
 
@@ -36,10 +35,11 @@ public class Exercise {
         num1=r.nextInt(10)+1;
         num2=r.nextInt(10)+1;
     }
-    public boolean checkAnswer(EditText answer){
+
+    public boolean checkAnswer(String answer){
         //String Num1;
         String result =num1*num2+"";
-        if (result.equals(answer.getText().toString()))
+        if (result.equals(answer.toString()))
             return true;
         else
             return false;

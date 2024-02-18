@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:background="@android:color/holo_orange_light"
             android:gravity="center"
-            android:text="תשובה"
+            android:hint="תשובה"
             tools:ignore="Suspicious0dp" />
 
         <Button

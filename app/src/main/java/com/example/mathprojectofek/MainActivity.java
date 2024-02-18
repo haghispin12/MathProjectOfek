@@ -1,7 +1,10 @@
 package com.example.mathprojectofek;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,12 +26,29 @@ public class MainActivity extends AppCompatActivity {
     private Button showAll;
     private int num1;
     private int num2;
-    Exercise e1;
+    MainViewModel viewModelMain;
+    Intent intent;
+    String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        viewModelMain=new ViewModelProvider(this).get(MainViewModel.class);
+        viewModelMain.vNum1.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer num) {
+                tvNum1.setText(num+"");
+            }
+        });
+        viewModelMain.vNum2.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer num) {
+                tvNum2.setText(num+"");
+            }
+        });
+        intent=getIntent();
+        userName=intent.getStringExtra("userName");
     }
     public void initView() {
         challenge = findViewById(R.id.challenge);
@@ -43,29 +63,26 @@ public class MainActivity extends AppCompatActivity {
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                e1.generateNumsChallenge();
-                updateView();
+                viewModelMain.vChallenge();
             }
         });
         double20.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                e1.generateNumsTill20();
-                updateView();
+                viewModelMain.vTill20();
             }
         });
         doubleBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                e1.generateNumsDoubleBoard();
-                updateView();
+                viewModelMain.vDoubleBoard();
             }
         });
         //Toast.makeText(this, "succes", Toast.LENGTH_SHORT).show();
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(e1.checkAnswer(answer))
+                if(viewModelMain.ex.checkAnswer(answer.getText().toString()))
                     Toast.makeText(MainActivity.this,"success",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
@@ -88,10 +105,6 @@ public class MainActivity extends AppCompatActivity {
     /*
 
      */
-    public void updateView(){
-        tvNum1.setText(num1+"");
-        tvNum2.setText(num2+"");
-    }
 
 
     }
