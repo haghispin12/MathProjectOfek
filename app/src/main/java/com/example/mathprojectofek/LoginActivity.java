@@ -11,14 +11,13 @@ import android.widget.EditText;
 public class LoginActivity extends AppCompatActivity {
     private EditText userName;
     private Button submit;
-    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initview();
-        intent=new Intent(this,MainActivity.class);
-        intent.putExtra("userName",userName.getText().toString());
+
     }
     public void initview(){
         userName=findViewById(R.id.userName);
@@ -26,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                intent.putExtra("userName",userName.getText().toString());
                 startActivity(intent);
             }
         });

@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private Button check;
     private Button save;
     private Button showAll;
+    private TextView name;
     private int num1;
     private int num2;
     MainViewModel viewModelMain;
-    Intent intent;
     String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
                 tvNum2.setText(num+"");
             }
         });
-        intent=getIntent();
-        userName=intent.getStringExtra("userName");
+        Intent intent=getIntent();
+        String userName=intent.getStringExtra("userName");
+        name.setText(userName);
     }
     public void initView() {
         challenge = findViewById(R.id.challenge);
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         check = findViewById(R.id.check);
         save = findViewById(R.id.save);
         showAll = findViewById(R.id.showAll);
+        name=findViewById(R.id.name);
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
