@@ -1,5 +1,9 @@
 package com.example.mathprojectofek;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,8 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
     private Button challenge;
     private Button double20;
@@ -25,10 +27,21 @@ public class MainActivity extends AppCompatActivity {
     private Button save;
     private Button showAll;
     private TextView name;
+    private Button rate;
     private int num1;
     private int num2;
     MainViewModel viewModelMain;
     String userName;
+
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            int myrate = result.getData().getIntExtra("rate", -1);
+            Toast.makeText(MainActivity.this,myrate+"",Toast.LENGTH_SHORT).show();
+        }
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         save = findViewById(R.id.save);
         showAll = findViewById(R.id.showAll);
         name=findViewById(R.id.name);
+        rate=findViewById(R.id.rate);
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +114,14 @@ public class MainActivity extends AppCompatActivity {
         showAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+            }
+        });
+        rate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, rateActivity.class);
+                activityResultLauncher.launch(intent);
 
             }
         });
