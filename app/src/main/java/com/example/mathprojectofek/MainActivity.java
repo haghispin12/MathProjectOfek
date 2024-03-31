@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button rate;
     private int num1;
     private int num2;
+    private int score;
     MainViewModel viewModelMain;
     String userName;
 
@@ -40,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             int myrate = result.getData().getIntExtra("rate", -1);
             Toast.makeText(MainActivity.this,myrate+"",Toast.LENGTH_SHORT).show();
+            int showAllUsers=result.getData().getIntExtra("showUsers",-1);
         }
     });
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         String userName=intent.getStringExtra("userName");
         name.setText(userName);
         SharedPreferences sh=getSharedPreferences("sharedPref",MODE_PRIVATE);
-        String s1=sh.getString("name","");
-        name.setText(s1);
+        String s=sh.getString("name",userName);
+        name.setText(s);
     }
     public void initView() {
         challenge = findViewById(R.id.challenge);
@@ -103,10 +105,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(viewModelMain.ex.checkAnswer(answer.getText().toString()))
-                    Toast.makeText(MainActivity.this,"success",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
-
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
         showAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentTransaction trans=getSupportFragmentManager().beginTransaction();
+                trans.add(R.id.framelayout,new fragment_showusers());
+                trans.commit();
             }
         });
         rate.setOnClickListener(new View.OnClickListener() {

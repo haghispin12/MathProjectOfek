@@ -22,12 +22,12 @@ public class Exercise {
     }
     public void  generateNumsChallenge(){
         Random r=new Random();
-        num1=r.nextInt(10)+1;
+        num1=r.nextInt(90)+10;
         num2=r.nextInt(90)+10;
     }
     public void generateNumsTill20(){
         Random r=new Random();
-        num1=r.nextInt(10)+1;
+        num1=r.nextInt(10)+10;
         num2=r.nextInt(10)+10;
     }
     public void  generateNumsDoubleBoard(){
