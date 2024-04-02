@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private Button showAll;
     private TextView name;
     private Button rate;
+    private TextView score;
     private int num1;
     private int num2;
-    private int score;
     MainViewModel viewModelMain;
     String userName;
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         public void onActivityResult(ActivityResult result) {
             int myrate = result.getData().getIntExtra("rate", -1);
             Toast.makeText(MainActivity.this,myrate+"",Toast.LENGTH_SHORT).show();
+            viewModelMain.setRate(myrate);
             int showAllUsers=result.getData().getIntExtra("showUsers",-1);
         }
     });
@@ -66,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=getIntent();
         String userName=intent.getStringExtra("userName");
         name.setText(userName);
-        SharedPreferences sh=getSharedPreferences("sharedPref",MODE_PRIVATE);
-        String s=sh.getString("name",userName);
+        viewModelMain.setName(userName);
+        SharedPreferences sh=getSharedPreferences("SharedPref",MODE_PRIVATE);
+        String s=sh.getString("name","error");
         name.setText(s);
     }
     public void initView() {
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         showAll = findViewById(R.id.showAll);
         name=findViewById(R.id.name);
         rate=findViewById(R.id.rate);
+        score=findViewById(R.id.score);
         challenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,8 +107,11 @@ public class MainActivity extends AppCompatActivity {
         check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(viewModelMain.ex.checkAnswer(answer.getText().toString()))
+                if(viewModelMain.ex.checkAnswer(answer.getText().toString())) {
                     Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
+                    viewModelMain.addScore(viewModelMain.bet);
+                    score.setText("score:"+viewModelMain.getScore());
+                }
                 else
                     Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
             }
