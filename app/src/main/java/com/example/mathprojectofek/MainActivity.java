@@ -125,9 +125,11 @@ public class MainActivity extends AppCompatActivity {
         showAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction trans=getSupportFragmentManager().beginTransaction();
-                trans.add(R.id.framelayout,new fragment_showusers());
-                trans.commit();
+                //FragmentTransaction trans=getSupportFragmentManager().beginTransaction();
+                //trans.add(R.id.framelayout,new fragment_showusers());
+                //trans.commit();
+                Intent intent=new Intent(MainActivity.this,showUsersActivity.class);
+                startActivity(intent);
             }
         });
         rate.setOnClickListener(new View.OnClickListener() {

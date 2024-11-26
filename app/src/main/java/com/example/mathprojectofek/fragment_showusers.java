@@ -74,7 +74,7 @@ public class fragment_showusers extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the fruit.xml for this fragment
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
         initView(view);
         return  view;
