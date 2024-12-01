@@ -1,10 +1,10 @@
 package com.example.mathprojectofek;
 
-public class fruit {
+public class Fruit {
     private String name;
     private int drawble;
 
-    public fruit(int drawble,String name) {
+    public Fruit(int drawble, String name) {
         this.drawble = drawble;
         this.name=name;
     }
