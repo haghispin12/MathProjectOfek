@@ -108,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(viewModelMain.ex.checkAnswer(answer.getText().toString())) {
-                    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "success",
+                            Toast.LENGTH_SHORT).show();
                     viewModelMain.addScore(viewModelMain.bet);
                     score.setText("score:"+viewModelMain.getScore());
                 }

@@ -1,8 +1,13 @@
 package com.example.mathprojectofek;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 public class Fruit {
     private String name;
     private int drawble;
+
+
+
 
     public Fruit(int drawble, String name) {
         this.drawble = drawble;

@@ -9,8 +9,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class showUsersActivity extends AppCompatActivity {
     private RecyclerView ShowFruits;
+    private RecyclerView ShowUsers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,5 +24,11 @@ public class showUsersActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        initView();
+    }
+    ArrayList<Fruit>fruits=new ArrayList<>();
+
+    private void initView() {
+        ShowUsers=findViewById(R.id.rcShowUsers);
     }
 }
