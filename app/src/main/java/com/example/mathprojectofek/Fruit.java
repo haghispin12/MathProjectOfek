@@ -9,7 +9,7 @@ public class Fruit {
 
 
 
-    public Fruit(int drawble, String name) {
+    public Fruit(String name,int drawble) {
         this.drawble = drawble;
         this.name=name;
     }
