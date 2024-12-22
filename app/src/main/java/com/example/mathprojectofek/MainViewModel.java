@@ -1,5 +1,7 @@
 package com.example.mathprojectofek;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -54,4 +56,7 @@ public class MainViewModel extends ViewModel {
         return ex.checkAnswer(s);
     }
 
+    public long dbAddUser(Context con){
+
+    }
 }
