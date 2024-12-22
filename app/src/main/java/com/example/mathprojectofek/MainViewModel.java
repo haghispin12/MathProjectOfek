@@ -56,7 +56,7 @@ public class MainViewModel extends ViewModel {
         return ex.checkAnswer(s);
     }
 
-    public long dbAddUser(Context con){
-
-    }
+//    public long dbAddUser(Context con){
+//
+//    }
 }
