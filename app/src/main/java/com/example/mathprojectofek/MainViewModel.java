@@ -1,9 +1,12 @@
 package com.example.mathprojectofek;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import DBhelper.DBHelper;
 
 public class MainViewModel extends ViewModel {
     MutableLiveData <Integer> vNum1;
@@ -56,7 +59,10 @@ public class MainViewModel extends ViewModel {
         return ex.checkAnswer(s);
     }
 
-//    public long dbAddUser(Context con){
-//
-//    }
+    public long dbAddUser(Context con){
+        DBHelper db=new DBHelper(con);
+        long id= db.insert(user,con);
+        Log.d("ofek",id+"");
+        return id;
+    }
 }

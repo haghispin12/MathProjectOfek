@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  .
@@ -67,6 +68,15 @@ public class fragment_showusers extends Fragment {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+        addUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long id = 0;
+                if (getActivity() != null)
+                    id = mainViewModel.dbAddUser(getActivity());
+                Toast.makeText(getActivity(), id+"", Toast.LENGTH_LONG).show();
             }
         });
     }
