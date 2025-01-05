@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 import DBhelper.DBHelper;
 
 public class MainViewModel extends ViewModel {
@@ -14,6 +16,7 @@ public class MainViewModel extends ViewModel {
     Exercise ex;
     User user;
     int bet;
+    MutableLiveData<ArrayList<User>> users=new MutableLiveData<ArrayList<User>>();
     public MainViewModel(){
         vNum1=new MutableLiveData<>();
         vNum2=new MutableLiveData<>();
@@ -64,5 +67,8 @@ public class MainViewModel extends ViewModel {
         long id= db.insert(user,con);
         Log.d("ofek",id+"");
         return id;
+    }public void getUsers(Context con){
+        DBHelper db=new DBHelper(con);
+        users.setValue(db.selectAll());
     }
 }
