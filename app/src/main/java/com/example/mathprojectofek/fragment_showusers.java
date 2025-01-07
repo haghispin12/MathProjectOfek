@@ -1,6 +1,7 @@
 package com.example.mathprojectofek;
 
 import static android.app.Activity.RESULT_OK;
+import static android.widget.Toast.LENGTH_SHORT;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -75,7 +76,7 @@ public class fragment_showusers extends Fragment {
         backToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                return inflater.inflate(R.layout.fragment_showusers,container,false);
             }
         });
         addUser.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +101,13 @@ public class fragment_showusers extends Fragment {
         mainViewModel.users.observe(this , new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
-                int n =10;
+                userAdapter userAdapter;
+                userAdapter = new userAdapter(users, new userAdapter.OnItemClicklListener1() {
+                    @Override
+                    public void OnItemClick(User item) {
+
+                    }
+                });
             }
         });
         return  view;

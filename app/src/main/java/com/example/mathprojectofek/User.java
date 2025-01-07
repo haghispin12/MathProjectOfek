@@ -8,9 +8,14 @@ public class User {
     String name;
     int rate;
     int score;
-
+    Bitmap bitmap;
     Uri uri;
     public User(long id, String name, int rating, Bitmap bitmap, int score) {
+        this.id=id;
+        this.name=name;
+        this.rate=rating;
+        this.bitmap=bitmap;
+        this.score=score;
     }
 
     public User(String fruitName, int fruit) {
@@ -55,5 +60,13 @@ public class User {
 
     public void setUri(Uri uri) {
         this.uri = uri;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }
