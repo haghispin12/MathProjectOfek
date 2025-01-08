@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ import java.util.ArrayList;
  */
 public class fragment_showusers extends Fragment {
     private EditText user;
+    private TextView score;
+    private TextView rate;
     private Button addPicture;
     private Button addUser;
     private ImageView image;
@@ -56,10 +59,13 @@ public class fragment_showusers extends Fragment {
 
     private void initView(View view) {
         user =view.findViewById(R.id.user);
+        score=view.findViewById(R.id.score);
+        rate=view.findViewById(R.id.rate);
         addPicture=view.findViewById(R.id.addPicture);
         image=view.findViewById(R.id.image);
         addUser=view.findViewById(R.id.addUser);
         backToMain=view.findViewById(R.id.backToMain);
+
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,9 +89,9 @@ public class fragment_showusers extends Fragment {
             @Override
             public void onClick(View view) {
                 long id = 0;
-                if (getActivity() != null)
-                    id = mainViewModel.dbAddUser(getActivity());
-                Toast.makeText(getActivity(), id+"", Toast.LENGTH_LONG).show();
+                if (getActivity() != null) {
+                }id = mainViewModel.dbAddUser(getActivity());
+                Toast.makeText(getActivity(), id + "", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -97,7 +103,10 @@ public class fragment_showusers extends Fragment {
         // Inflate the fruit.xml for this fragment
         View view = inflater.inflate(R.layout.fragment_showusers, container, false);
         initView(view);
-        mainViewModel=new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel=new ViewModelProvider(getActivity()).get(MainViewModel.class);
+        this.score.setText("score: "+mainViewModel.getUser().getScore()+"");
+        this.user.setText("name: "+mainViewModel.getUser().getName());
+        this.rate.setText("rate: "+mainViewModel.getUser().getRate()+"");
         mainViewModel.users.observe(this , new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
@@ -110,6 +119,7 @@ public class fragment_showusers extends Fragment {
                 });
             }
         });
+
         return  view;
 
     }

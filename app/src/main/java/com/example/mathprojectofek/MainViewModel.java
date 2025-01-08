@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import DBhelper.DBHelper;
-
 public class MainViewModel extends ViewModel {
     MutableLiveData <Integer> vNum1;
     MutableLiveData <Integer> vNum2;
@@ -32,11 +30,17 @@ public class MainViewModel extends ViewModel {
     public void addScore(int score){
         int sc= user.getScore()+score;
         user.setScore(sc);
+
     }
     public void minusScore(int score){
         int sc=user.getScore()-score;
         user.setScore(sc);
     }
+
+    public User getUser() {
+        return user;
+    }
+
     public int getScore(){
         return user.getScore();
     }

@@ -52,28 +52,31 @@
         <Button
             android:id="@+id/challenge"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="אתגר"
+            android:textSize="30dp"
             tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/double20"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="כפל עד 20"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:textSize="20dp"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/doubleBoard"
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="לוח הכפל"
+            android:textSize="20dp"
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
@@ -95,6 +98,7 @@
             android:background="@android:color/holo_orange_light"
             android:gravity="center"
             android:text=""
+            android:textSize="50dp"
             tools:ignore="Suspicious0dp" />
 
         <TextView
@@ -117,6 +121,7 @@
             android:background="@android:color/holo_orange_light"
             android:gravity="center"
             android:text=""
+            android:textSize="50dp"
             tools:ignore="Suspicious0dp" />
 
         <EditText
@@ -128,6 +133,7 @@
             android:background="@android:color/holo_orange_light"
             android:gravity="center"
             android:hint="תשובה"
+            android:textSize="40dp"
             tools:ignore="Suspicious0dp" />
 
         <Button
@@ -135,7 +141,8 @@
             android:layout_width="200dp"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="בדיקה"/>
+            android:text="בדיקה"
+            android:textSize="30dp"/>
     </LinearLayout>
 
     <LinearLayout

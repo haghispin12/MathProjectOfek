@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragment_showusers"
     android:orientation="vertical"
+
     android:background="@color/white"
     tools:ignore="HardcodedText">
 
@@ -13,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         tools:ignore="UselessParent">
 
         <EditText
@@ -21,6 +23,7 @@
             android:layout_height="match_parent"
             android:text="user:" />
         <TextView
+            android:id="@+id/score"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
@@ -28,6 +31,7 @@
             android:textSize="20dp"
             android:text="score:"/>
         <TextView
+            android:id="@+id/rate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="40dp"
