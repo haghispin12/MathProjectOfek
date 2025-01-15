@@ -18,7 +18,7 @@
         tools:ignore="UselessParent">
 
         <EditText
-            android:id="@+id/user"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="user:" />

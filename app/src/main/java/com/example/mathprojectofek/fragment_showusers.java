@@ -1,11 +1,11 @@
 package com.example.mathprojectofek;
 
 import static android.app.Activity.RESULT_OK;
-import static android.widget.Toast.LENGTH_SHORT;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -28,16 +30,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
 /**
  .
  */
 public class fragment_showusers extends Fragment {
-    private EditText user;
+    private EditText userName;
     private TextView score;
     private TextView rate;
     private Button addPicture;
     private Button addUser;
+    private RecyclerView rcUsers;
     private ImageView image;
     private Button backToMain;
     Uri uri;
@@ -48,6 +52,7 @@ public class fragment_showusers extends Fragment {
         public void onActivityResult(ActivityResult result) {
             if(result.getResultCode()==RESULT_OK){
                 image.setImageURI(uri);
+                mainViewModel.getUser().setUri(uri);
             }
         }
     });
@@ -58,12 +63,13 @@ public class fragment_showusers extends Fragment {
     }
 
     private void initView(View view) {
-        user =view.findViewById(R.id.user);
+        userName =view.findViewById(R.id.userName);
         score=view.findViewById(R.id.score);
         rate=view.findViewById(R.id.rate);
         addPicture=view.findViewById(R.id.addPicture);
         image=view.findViewById(R.id.image);
         addUser=view.findViewById(R.id.addUser);
+        rcUsers=view.findViewById(R.id.rcUsers);
         backToMain=view.findViewById(R.id.backToMain);
 
         addPicture.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +95,8 @@ public class fragment_showusers extends Fragment {
             @Override
             public void onClick(View view) {
                 long id = 0;
-                if (getActivity() != null) {
-                }id = mainViewModel.dbAddUser(getActivity());
+                if (getActivity() != null)
+                    id = mainViewModel.dbAddUser(getActivity());
                 Toast.makeText(getActivity(), id + "", Toast.LENGTH_LONG).show();
             }
         });
@@ -105,18 +111,21 @@ public class fragment_showusers extends Fragment {
         initView(view);
         mainViewModel=new ViewModelProvider(getActivity()).get(MainViewModel.class);
         this.score.setText("score: "+mainViewModel.getUser().getScore()+"");
-        this.user.setText("name: "+mainViewModel.getUser().getName());
+        this.userName.setText("name: "+mainViewModel.getUser().getName());
         this.rate.setText("rate: "+mainViewModel.getUser().getRate()+"");
         mainViewModel.users.observe(this , new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
-                userAdapter userAdapter;
-                userAdapter = new userAdapter(users, new userAdapter.OnItemClicklListener1() {
+                users.add(mainViewModel.getUser());
+                userAdapter userAdapter = new userAdapter(users, new userAdapter.OnItemClicklListener1() {
                     @Override
                     public void OnItemClick(User item) {
-
+                        Toast.makeText(requireActivity(), item.getName(), Toast.LENGTH_SHORT).show();
                     }
                 });
+                rcUsers.setLayoutManager(new LinearLayoutManager(requireActivity()));
+                rcUsers.setAdapter(userAdapter);
+                rcUsers.setHasFixedSize(true);
             }
         });
 

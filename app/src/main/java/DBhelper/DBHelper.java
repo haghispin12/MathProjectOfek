@@ -1,4 +1,4 @@
-package com.example.mathprojectofek;
+package DBhelper;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -13,6 +13,8 @@ import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
 
+
+import com.example.mathprojectofek.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

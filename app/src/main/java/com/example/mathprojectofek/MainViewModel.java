@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
+import DBhelper.DBHelper;
+
 public class MainViewModel extends ViewModel {
     MutableLiveData <Integer> vNum1;
     MutableLiveData <Integer> vNum2;
