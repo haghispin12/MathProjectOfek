@@ -55,6 +55,7 @@ public class userAdapter extends RecyclerView.Adapter<userAdapter.MyViewHolder> 
 
         public void bind(final User item, final OnItemClicklListener1 listener) {
             userName.setText(item.getName());
+            userScore.setText(item.getScore()+"");
             userImage.setImageBitmap(item.getBitmap());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

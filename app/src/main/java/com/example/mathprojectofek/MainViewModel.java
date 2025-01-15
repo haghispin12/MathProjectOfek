@@ -16,12 +16,13 @@ public class MainViewModel extends ViewModel {
     Exercise ex;
     User user;
     int bet;
-    MutableLiveData<ArrayList<User>> users=new MutableLiveData<ArrayList<User>>();
+    MutableLiveData<ArrayList<User>> users;
     public MainViewModel(){
         vNum1=new MutableLiveData<>();
         vNum2=new MutableLiveData<>();
         ex=new Exercise();
         user=new User();
+        users=new MutableLiveData<ArrayList<User>>();
     }
     public void setName(String name){
         user.setName(name);
@@ -72,8 +73,10 @@ public class MainViewModel extends ViewModel {
         DBHelper db=new DBHelper(con);
         long id= db.insert(user,con);
         Log.d("ofek",id+"");
+        getUsers(con);
         return id;
-    }public void getUsers(Context con){
+    }
+    public void getUsers(Context con){
         DBHelper db=new DBHelper(con);
         users.setValue(db.selectAll());
     }

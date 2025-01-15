@@ -116,7 +116,6 @@ public class fragment_showusers extends Fragment {
         mainViewModel.users.observe(this , new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
-                users.add(mainViewModel.getUser());
                 userAdapter userAdapter = new userAdapter(users, new userAdapter.OnItemClicklListener1() {
                     @Override
                     public void OnItemClick(User item) {
@@ -128,7 +127,7 @@ public class fragment_showusers extends Fragment {
                 rcUsers.setHasFixedSize(true);
             }
         });
-
+        mainViewModel.getUsers(getActivity());
         return  view;
 
     }
