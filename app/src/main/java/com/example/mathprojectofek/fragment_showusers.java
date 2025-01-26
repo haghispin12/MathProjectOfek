@@ -42,7 +42,7 @@ import java.util.BitSet;
 /**
  .
  */
-public class fragment_showusers extends Fragment {
+public class fragment_showusers extends Fragment implements MenuProvider{
     private EditText userName;
     private TextView score;
     private TextView rate;
@@ -122,13 +122,17 @@ public class fragment_showusers extends Fragment {
         this.score.setText("score: "+mainViewModel.getUser().getScore()+"");
         this.userName.setText("name: "+mainViewModel.getUser().getName());
         this.rate.setText("rate: "+mainViewModel.getUser().getRate()+"");
-        mainViewModel.users.observe(this , new Observer<ArrayList<User>>() {
+        requireActivity().addMenuProvider(this);
+        mainViewModel.users.observe(requireActivity() , new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
                 userAdapter userAdapter = new userAdapter(users, new userAdapter.OnItemClicklListener1() {
                     @Override
                     public void OnItemClick(User item) {
                         Toast.makeText(requireActivity(), item.getName(), Toast.LENGTH_SHORT).show();
+                        userName.setText("name:"+item.getName());
+                        score.setText("score:"+item.getScore());
+                        rate.setText("rate:"+item.getRate());
                     }
                 });
                 rcUsers.setLayoutManager(new LinearLayoutManager(requireActivity()));
@@ -137,16 +141,30 @@ public class fragment_showusers extends Fragment {
             }
         });
         mainViewModel.getUsers(getActivity());
-        requireActivity().addMenuProvider((MenuProvider) this);
         return  view;
     }
+    @Override
     public void onCreateMenu(@NonNull Menu menu,@NonNull MenuInflater menuInflater){
         menuInflater.inflate(R.menu.main_menu,menu);
         itemDelete= menu.findItem(R.id.action_delete);
-        itemDelete.setVisible(false);
+        itemDelete.setVisible(true);
         itemEdit=menu.findItem(R.id.action_edit);
-        itemEdit.setVisible(false);
+        itemEdit.setVisible(true);
         super.onCreateOptionsMenu(menu,menuInflater);
+    }
+
+    @Override
+    public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+        int id=menuItem.getItemId();
+        switch (id){
+            case R.id.action_delete:
+                //do something
+                return true;
+            case R.id.action_edit:
+                //do something
+                return true;
+        }
+        return false;
     }
 
 }
