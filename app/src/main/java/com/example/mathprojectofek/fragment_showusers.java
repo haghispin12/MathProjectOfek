@@ -3,9 +3,11 @@ package com.example.mathprojectofek;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.RouteListingPreference;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,6 +15,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,6 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -44,6 +51,8 @@ public class fragment_showusers extends Fragment {
     private RecyclerView rcUsers;
     private ImageView image;
     private Button backToMain;
+    private MenuItem itemDelete;
+    private MenuItem itemEdit;
     Uri uri;
     MainViewModel mainViewModel;
 
@@ -128,7 +137,16 @@ public class fragment_showusers extends Fragment {
             }
         });
         mainViewModel.getUsers(getActivity());
+        requireActivity().addMenuProvider((MenuProvider) this);
         return  view;
-
     }
+    public void onCreateMenu(@NonNull Menu menu,@NonNull MenuInflater menuInflater){
+        menuInflater.inflate(R.menu.main_menu,menu);
+        itemDelete= menu.findItem(R.id.action_delete);
+        itemDelete.setVisible(false);
+        itemEdit=menu.findItem(R.id.action_edit);
+        itemEdit.setVisible(false);
+        super.onCreateOptionsMenu(menu,menuInflater);
+    }
+
 }
