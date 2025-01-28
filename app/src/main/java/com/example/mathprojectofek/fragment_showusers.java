@@ -3,8 +3,10 @@ package com.example.mathprojectofek;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.RouteListingPreference;
@@ -55,7 +57,7 @@ public class fragment_showusers extends Fragment implements MenuProvider{
     private MenuItem itemEdit;
     Uri uri;
     MainViewModel mainViewModel;
-
+    User currentUser=new User();
     ActivityResultLauncher<Intent>startCamera=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -120,7 +122,7 @@ public class fragment_showusers extends Fragment implements MenuProvider{
         initView(view);
         mainViewModel=new ViewModelProvider(getActivity()).get(MainViewModel.class);
         this.score.setText("score: "+mainViewModel.getUser().getScore()+"");
-        this.userName.setText("name: "+mainViewModel.getUser().getName());
+        this.userName.setText(mainViewModel.getUser().getName());
         this.rate.setText("rate: "+mainViewModel.getUser().getRate()+"");
         requireActivity().addMenuProvider(this);
         mainViewModel.users.observe(requireActivity() , new Observer<ArrayList<User>>() {
@@ -130,9 +132,12 @@ public class fragment_showusers extends Fragment implements MenuProvider{
                     @Override
                     public void OnItemClick(User item) {
                         Toast.makeText(requireActivity(), item.getName(), Toast.LENGTH_SHORT).show();
-                        userName.setText("name:"+item.getName());
+                        userName.setText(item.getName());
                         score.setText("score:"+item.getScore());
                         rate.setText("rate:"+item.getRate());
+                        currentUser=item;
+                        itemDelete.setVisible(true);
+                        itemEdit.setVisible(true);
                     }
                 });
                 rcUsers.setLayoutManager(new LinearLayoutManager(requireActivity()));
@@ -147,9 +152,9 @@ public class fragment_showusers extends Fragment implements MenuProvider{
     public void onCreateMenu(@NonNull Menu menu,@NonNull MenuInflater menuInflater){
         menuInflater.inflate(R.menu.main_menu,menu);
         itemDelete= menu.findItem(R.id.action_delete);
-        itemDelete.setVisible(true);
+        itemDelete.setVisible(false);
         itemEdit=menu.findItem(R.id.action_edit);
-        itemEdit.setVisible(true);
+        itemEdit.setVisible(false);
         super.onCreateOptionsMenu(menu,menuInflater);
     }
 
@@ -159,9 +164,28 @@ public class fragment_showusers extends Fragment implements MenuProvider{
         switch (id){
             case R.id.action_delete:
                 //do something
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(requireActivity());
+                alertDialog.setTitle("Delete");
+                alertDialog.setMessage("Do you want to delete?");
+                alertDialog.setCancelable(true);
+                alertDialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mainViewModel.dbDelete(getActivity(),currentUser);
+                        dialogInterface.dismiss();
+                    }
+                });
+                alertDialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
                 return true;
             case R.id.action_edit:
                 //do something
+                currentUser.setName(userName.getText().toString());
+                mainViewModel.dbUpdate(getActivity(),currentUser);
                 return true;
         }
         return false;

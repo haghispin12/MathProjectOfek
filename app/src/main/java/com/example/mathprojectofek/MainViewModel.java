@@ -80,4 +80,14 @@ public class MainViewModel extends ViewModel {
         DBHelper db=new DBHelper(con);
         users.setValue(db.selectAll());
     }
+    public void dbUpdate(Context con,User user){
+        DBHelper db=new DBHelper(con);
+        db.update(user);
+        getUsers(con);
+    }
+    public void dbDelete(Context con,User user){
+        DBHelper db=new DBHelper(con);
+        db.deleteById(user.getId());
+        getUsers(con);
+    }
 }
