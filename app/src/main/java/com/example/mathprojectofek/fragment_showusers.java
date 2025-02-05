@@ -181,6 +181,7 @@ public class fragment_showusers extends Fragment implements MenuProvider{
                         dialogInterface.dismiss();
                     }
                 });
+                alertDialog.show();
                 return true;
             case R.id.action_edit:
                 //do something
