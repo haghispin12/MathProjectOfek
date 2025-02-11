@@ -1,4 +1,4 @@
-package com.example.mathprojectofek;
+package com.example.mathprojectofek.mathProject;
 
 import android.graphics.Bitmap;
 import android.net.Uri;

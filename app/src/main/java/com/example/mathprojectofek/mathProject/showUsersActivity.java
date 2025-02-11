@@ -1,4 +1,4 @@
-package com.example.mathprojectofek;
+package com.example.mathprojectofek.mathProject;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mathprojectofek.R;
 
 import java.util.ArrayList;
 

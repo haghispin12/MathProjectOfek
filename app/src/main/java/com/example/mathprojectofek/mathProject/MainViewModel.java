@@ -1,4 +1,4 @@
-package com.example.mathprojectofek;
+package com.example.mathprojectofek.mathProject;
 
 import android.content.Context;
 import android.util.Log;

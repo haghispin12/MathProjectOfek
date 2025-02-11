@@ -14,7 +14,7 @@ import android.provider.MediaStore;
 import androidx.annotation.Nullable;
 
 
-import com.example.mathprojectofek.User;
+import com.example.mathprojectofek.mathProject.User;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

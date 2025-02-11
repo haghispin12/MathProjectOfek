@@ -1,6 +1,4 @@
-package com.example.mathprojectofek;
-
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.mathprojectofek.mathProject;
 
 public class Fruit {
     private String name;

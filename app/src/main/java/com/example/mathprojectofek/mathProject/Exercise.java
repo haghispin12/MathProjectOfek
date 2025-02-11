@@ -1,4 +1,4 @@
-package com.example.mathprojectofek;
+package com.example.mathprojectofek.mathProject;
 
 import java.util.Random;
 
