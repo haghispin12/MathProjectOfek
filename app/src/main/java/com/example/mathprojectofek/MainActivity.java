@@ -1,6 +1,7 @@
 package com.example.mathprojectofek;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -10,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class MainActivity extends AppCompatActivity {
 private EditText email;
 private EditText name;
@@ -18,6 +22,8 @@ private Button register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        Log.d("","");
         EdgeToEdge.enable(this);
         initView();
         setContentView(R.layout.activity_main2);
