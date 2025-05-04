@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="120dp"
         tools:ignore="MissingConstraints">
         <Spinner
             android:id="@+id/Spinner1"
