@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Student {
     private String name;
-    private ArrayList<String>choices;
+    private ArrayList<Student>choices;
 
-    public Student(String name, ArrayList<String> choices) {
+    public Student(String name, ArrayList<Student> choices) {
         this.name = name;
         this.choices = choices;
     }
@@ -23,11 +23,11 @@ public class Student {
         this.name = name;
     }
 
-    public ArrayList<String> getChoices() {
+    public ArrayList<Student> getChoices() {
         return choices;
     }
 
-    public void setChoices(ArrayList<String> choices) {
+    public void setChoices(ArrayList<Student> choices) {
         this.choices = choices;
     }
 }
