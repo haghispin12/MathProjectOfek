@@ -15,6 +15,42 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="חדר 3"
+                android:textSize="30dp"/>
+            <TextView
+                android:id="@+id/friend13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="אהרון"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/friend23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="יהודה"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/friend33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="אברהם"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/friend43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="יצחק"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             android:gravity="center">
             <TextView
                 android:layout_width="wrap_content"
@@ -25,31 +61,25 @@
                 android:id="@+id/friend12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="יעקב"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="יוסף"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="זבולון"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend42"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:id="@+id/friend52"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="יששכר"
                 android:layout_marginTop="10dp"/>
         </LinearLayout>
         <LinearLayout
@@ -67,31 +97,25 @@
                 android:id="@+id/friend11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="דוד"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="משה"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="שלמה"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/friend41"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="אהרון"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:id="@+id/friend51"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="אהרון"
+                android:text="ראובן"
                 android:layout_marginTop="10dp"/>
         </LinearLayout>
     </LinearLayout>
