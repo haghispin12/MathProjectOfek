@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Room {
     private int num;
-    private ArrayList<Integer> memebers;
+    private ArrayList<Long> memebers;
 
     public Room(int num) {
         this.num = num;
@@ -19,18 +19,18 @@ public class Room {
         this.num = num;
     }
 
-    public ArrayList<Integer> getMemebers() {
+    public ArrayList<Long> getMemebers() {
         return memebers;
     }
 
-    public void setMemebers(ArrayList<Integer> memebers) {
+    public void setMemebers(ArrayList<Long> memebers) {
         this.memebers = memebers;
     }
 
-    public void addStudent(int id){
+    public void addStudent(long id){
         memebers.add(id);
     }
-    public boolean isInRoom(int id){
+    public boolean isInRoom(long id){
         for (int i=0;i<memebers.size();i++){
             if(memebers.get(i)==id) {
                 return true;

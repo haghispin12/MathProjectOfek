@@ -36,13 +36,18 @@ public class rooms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        initView();
         setContentView(R.layout.activity_rooms);
+        initView();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        rooms=new ArrayList<Room>();
+        for (int i=0;i<3;i++){
+            Room room=new Room(i);
+            rooms.add(room);
+        }
         FirebaseFirestore.getInstance().collection("students").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -52,13 +57,31 @@ public class rooms extends AppCompatActivity {
                         String name = documentSnapshot.getString("name");
                         int id = documentSnapshot.getLong("id").intValue();
                         boolean isChosen = documentSnapshot.getBoolean("isChosen");
-                        ArrayList<Integer> members = (ArrayList<Integer>) documentSnapshot.get("members");
+                        ArrayList<Long> members = (ArrayList<Long>) documentSnapshot.get("members");
                         DocumentReference doc = documentSnapshot.getReference();
-                        students.add(new Student(name, members, id, isChosen, doc));
+                        Student student=new Student(name, members, id, isChosen, doc);
+                        students.add(student);
                     }
                 }
+                rooms.get(0).addStudent(students.get(0).getId());
+                makeRooms(rooms,students.get(0));
+                friend11.setText(getStudent(rooms.get(0).getMemebers().get(0)).getName());
+                friend21.setText(getStudent(rooms.get(0).getMemebers().get(1)).getName());
+                friend31.setText(getStudent(rooms.get(0).getMemebers().get(2)).getName());
+                friend41.setText(getStudent(rooms.get(0).getMemebers().get(3)).getName());
+
+                friend12.setText(getStudent(rooms.get(1).getMemebers().get(0)).getName());
+                friend22.setText(getStudent(rooms.get(1).getMemebers().get(1)).getName());
+                friend32.setText(getStudent(rooms.get(1).getMemebers().get(2)).getName());
+                friend42.setText(getStudent(rooms.get(1).getMemebers().get(3)).getName());
+
+                friend13.setText(getStudent(rooms.get(2).getMemebers().get(0)).getName());
+                friend23.setText(getStudent(rooms.get(2).getMemebers().get(1)).getName());
+                friend33.setText(getStudent(rooms.get(2).getMemebers().get(2)).getName());
+                friend43.setText(getStudent(rooms.get(2).getMemebers().get(3)).getName());
             }
         });
+
     }
 
     private void initView() {
@@ -74,37 +97,34 @@ public class rooms extends AppCompatActivity {
         friend23=findViewById(R.id.friend23);
         friend33=findViewById(R.id.friend33);
         friend43=findViewById(R.id.friend43);
-        rooms.get(0).addStudent(students.get(0).getId());
-        Student currentStudent = students.get(0);
-        for(int i=0;i<rooms.size();i++){
-            while (!(rooms.get(i).isFull())){
-                for (int j=0;j<currentStudent.getChoices().size();j++) {
-                    if (!(rooms.get(i).isInRoom(currentStudent.getChoices().get(j))))
-                        rooms.get(i).addStudent(currentStudent.getChoices().get(j));
-                    currentStudent = getStudent(currentStudent.getChoices().get(j));
-                }
-            }
-        }
-        friend11.setText(getStudent(rooms.get(0).getMemebers().get(0)).getName());
-        friend21.setText(getStudent(rooms.get(0).getMemebers().get(1)).getName());
-        friend31.setText(getStudent(rooms.get(0).getMemebers().get(2)).getName());
-        friend41.setText(getStudent(rooms.get(0).getMemebers().get(3)).getName());
 
-        friend12.setText(getStudent(rooms.get(1).getMemebers().get(0)).getName());
-        friend22.setText(getStudent(rooms.get(1).getMemebers().get(1)).getName());
-        friend32.setText(getStudent(rooms.get(1).getMemebers().get(2)).getName());
-        friend42.setText(getStudent(rooms.get(1).getMemebers().get(3)).getName());
 
-        friend13.setText(getStudent(rooms.get(2).getMemebers().get(0)).getName());
-        friend23.setText(getStudent(rooms.get(2).getMemebers().get(1)).getName());
-        friend33.setText(getStudent(rooms.get(2).getMemebers().get(2)).getName());
-        friend43.setText(getStudent(rooms.get(2).getMemebers().get(3)).getName());
+
     }
-    private Student getStudent(int id){
+    private Student getStudent(long id){
         for (int i=0;i<students.size();i++){
             if(students.get(i).getId()==id)
                 return students.get(i);
         }
         return null;
+    }
+    private void makeRooms(ArrayList<Room>rooms,Student currentStudent){
+        long inTheRoom;
+        for(int i=0;i<rooms.size();i++){
+            while (!(rooms.get(i).isFull())){
+                inTheRoom=studentToRoom(rooms.get(i),currentStudent);
+                currentStudent=getStudent(inTheRoom);
+            }
+        }
+    }
+    private long studentToRoom (Room room,Student currentStudent){
+        for (int i=0;i<currentStudent.getChoices().size();i++) {
+            long tmp = currentStudent.getChoices().get(i);
+            if (!(room.isInRoom(tmp))) {
+                room.addStudent(currentStudent.getChoices().get(i));
+                return currentStudent.getChoices().get(i);
+            }
+        }
+        return 0;
     }
 }

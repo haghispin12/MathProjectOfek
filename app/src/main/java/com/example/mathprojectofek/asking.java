@@ -37,7 +37,7 @@ public class asking extends AppCompatActivity {
     private Button save;
     private ArrayList<Student>students;
     private ArrayList<String> names;
-    private ArrayList<Integer>choices=new ArrayList<>();
+    private ArrayList<Long>choices=new ArrayList<>();
     private Student currentStudent;
     boolean isFirst1 = true;
     boolean isFirst2 = true;
@@ -67,12 +67,14 @@ public class asking extends AppCompatActivity {
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     if (documentSnapshot.exists()) {
                         String name = documentSnapshot.getString("name");
-                        int id = documentSnapshot.getLong("id").intValue();
+                        //int id = documentSnapshot.getLong("id").intValue();
+                        Long id1 = documentSnapshot.getLong("id");//.intValue();
+                        Integer id = Math.toIntExact(id1);
                         boolean isChosen = documentSnapshot.getBoolean("isChosen");
-                        ArrayList<Integer> members = (ArrayList<Integer>) documentSnapshot.get("members");
+                        ArrayList<Long> members = (ArrayList<Long>) documentSnapshot.get("members");
                         names.add(name);
                         DocumentReference doc = documentSnapshot.getReference();
-                        students.add(new Student(name, members, id, isChosen, doc));
+                        students.add(new Student(name, members, id.intValue(), isChosen, doc));
                     }
                 }
                 loadStudents(names);
@@ -91,7 +93,7 @@ public class asking extends AppCompatActivity {
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    for (int i = 0; i < 4; i++) {
+                    for (int i = 0; i < choices.size(); i++) {
                         currentStudent.addChoice(choices.get(i));
                     }
                     currentStudent.getDoc().update("members",currentStudent.getChoices());
@@ -198,7 +200,7 @@ public class asking extends AppCompatActivity {
             return null;
         }
 
-        private int getId (String string){
+        private long getId (String string){
             for (int i = 0; i < students.size(); i++) {
                 if (students.get(i).getName().equals(string))
                     return students.get(i).getId();

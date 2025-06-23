@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Student {
     private String name;
-    private ArrayList<Integer> choices;
-    private int id;
+    private ArrayList<Long> choices;
+    private long id;
     private boolean isChosen;
     private DocumentReference doc;
 
@@ -24,7 +24,7 @@ public class Student {
         choices=new ArrayList<>();
     }
 
-    public Student(String name, ArrayList<Integer> choices, int id, boolean isChosen, DocumentReference doc) {
+    public Student(String name, ArrayList<Long> choices, long id, boolean isChosen, DocumentReference doc) {
         this.name = name;
         this.choices = choices;
         this.id = id;
@@ -41,23 +41,23 @@ public class Student {
         this.name = name;
     }
 
-    public ArrayList<Integer> getChoices() {
+    public ArrayList<Long> getChoices() {
         return choices;
     }
 
-    public void setChoices(ArrayList<Integer> choices) {
+    public void setChoices(ArrayList<Long> choices) {
         this.choices = choices;
     }
 
-    public void addChoice(Integer choice) {
+    public void addChoice(long choice) {
         choices.add(choice);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
