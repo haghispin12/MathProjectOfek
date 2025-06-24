@@ -30,14 +30,14 @@ public class Room {
     public void addStudent(long id){
         memebers.add(id);
     }
-    public boolean isInRoom(long id){
-        for (int i=0;i<memebers.size();i++){
-            if(memebers.get(i)==id) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean isInRoom(long id){
+//        for (int i=0;i<memebers.size();i++){
+//            if(memebers.get(i)==id) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
     public boolean isFull(){
         if(memebers.size()==4)
             return true;

@@ -10,6 +10,7 @@ public class Student {
     private long id;
     private boolean isChosen;
     private DocumentReference doc;
+    private boolean isInRoom;
 
     //    public Integer(String name, ArrayList<Integer> choices) {
 //        this.name = name;
@@ -24,12 +25,13 @@ public class Student {
         choices=new ArrayList<>();
     }
 
-    public Student(String name, ArrayList<Long> choices, long id, boolean isChosen, DocumentReference doc) {
+    public Student(String name, ArrayList<Long> choices, long id, boolean isChosen, DocumentReference doc, boolean isInRoom) {
         this.name = name;
         this.choices = choices;
         this.id = id;
         this.isChosen = isChosen;
         this.doc = doc;
+        this.isInRoom=isInRoom;
 
     }
 
@@ -59,6 +61,14 @@ public class Student {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isInRoom() {
+        return isInRoom;
+    }
+
+    public void setInRoom(boolean inRoom) {
+        isInRoom = inRoom;
     }
 
     public boolean isChosen() {

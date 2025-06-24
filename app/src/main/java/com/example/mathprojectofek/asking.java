@@ -64,6 +64,7 @@ public class asking extends AppCompatActivity {
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 asking.this.names = new ArrayList<>();
                 asking.this.students = new ArrayList<>();
+                names.add("בחר תלמיד");
                 for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     if (documentSnapshot.exists()) {
                         String name = documentSnapshot.getString("name");
@@ -74,7 +75,7 @@ public class asking extends AppCompatActivity {
                         ArrayList<Long> members = (ArrayList<Long>) documentSnapshot.get("members");
                         names.add(name);
                         DocumentReference doc = documentSnapshot.getReference();
-                        students.add(new Student(name, members, id.intValue(), isChosen, doc));
+                        students.add(new Student(name, members, id.intValue(), isChosen, doc,false));
                     }
                 }
                 loadStudents(names);
@@ -149,9 +150,9 @@ public class asking extends AppCompatActivity {
                     if (!isFirst2) {
                         choices.add(getId(parent.getItemAtPosition(position).toString()));
 
-                    }else{
+
+                    }else
                         isFirst2=false;
-                    }
                 }
 
                 @Override
@@ -164,6 +165,7 @@ public class asking extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if (!isFirst3) {
                         choices.add(getId(parent.getItemAtPosition(position).toString()));
+
                     }else {
                         isFirst3=false;
 

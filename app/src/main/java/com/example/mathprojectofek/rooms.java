@@ -1,6 +1,7 @@
 package com.example.mathprojectofek;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -59,11 +60,12 @@ public class rooms extends AppCompatActivity {
                         boolean isChosen = documentSnapshot.getBoolean("isChosen");
                         ArrayList<Long> members = (ArrayList<Long>) documentSnapshot.get("members");
                         DocumentReference doc = documentSnapshot.getReference();
-                        Student student=new Student(name, members, id, isChosen, doc);
+                        Student student=new Student(name, members, id, isChosen, doc,false);
                         students.add(student);
                     }
                 }
                 rooms.get(0).addStudent(students.get(0).getId());
+                students.get(0).setInRoom(true);
                 makeRooms(rooms,students.get(0));
                 friend11.setText(getStudent(rooms.get(0).getMemebers().get(0)).getName());
                 friend21.setText(getStudent(rooms.get(0).getMemebers().get(1)).getName());
@@ -110,21 +112,40 @@ public class rooms extends AppCompatActivity {
     }
     private void makeRooms(ArrayList<Room>rooms,Student currentStudent){
         long inTheRoom;
+        //scan all rooms
         for(int i=0;i<rooms.size();i++){
+            // if the room is not full
             while (!(rooms.get(i).isFull())){
                 inTheRoom=studentToRoom(rooms.get(i),currentStudent);
-                currentStudent=getStudent(inTheRoom);
+                Log.d("testLoop1","loop1");
+                //if not all choises  is already in rooms
+                if(inTheRoom!=-1)
+                    currentStudent=getStudent(inTheRoom);
+                else {
+                    for(int j=0;j<students.size();j++){
+                        if(!students.get(j).isInRoom())
+                            currentStudent=students.get(j);
+                    }
+                }
             }
+            Log.d("testLoop2","loop2");
         }
+        Log.d("testLoop3","loop3");
     }
     private long studentToRoom (Room room,Student currentStudent){
         for (int i=0;i<currentStudent.getChoices().size();i++) {
-            long tmp = currentStudent.getChoices().get(i);
-            if (!(room.isInRoom(tmp))) {
-                room.addStudent(currentStudent.getChoices().get(i));
-                return currentStudent.getChoices().get(i);
+            Log.d("testLoop4","studentToRoom before");
+            long selectedId=currentStudent.getChoices().get(i);
+            Student selectedStudent=getStudent(selectedId);
+            //if this student do not have a room
+            if (!selectedStudent.isInRoom()) {
+                Log.d("testLoop4","studentToRoom after");
+                // add this student to room
+                room.addStudent(selectedId);
+                selectedStudent.setInRoom(true);
+                return selectedId;
             }
         }
-        return 0;
+        return -1;
     }
 }
